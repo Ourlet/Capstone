@@ -1,6 +1,9 @@
 import os
+from typing import Collection
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import backref
+from sqlalchemy.sql.schema import ForeignKey
 db = SQLAlchemy()
 '''
 setup_db(app):
@@ -22,23 +25,104 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
 
+
 '''
-Person
-Have title and release year
+Distribution
+Table to allow many-to-many relationship between Actors and Movies
 '''
-class Person(db.Model):  
-  __tablename__ = 'People'
+distribution = db.Table(
+  'distribution',
+  Column('actor_id', Integer, ForeignKey('actors.id'), primary_key=True),
+  Column('movie_id', Integer, ForeignKey('movies.id'), primary_key=True)
+)
 
-  id = Column(Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
+'''
+Movie 
+Have title, release date and distribution foreign key
+'''
+class Movie(db.Model):  
+  __tablename__ = 'movies'
 
-  def __init__(self, name, catchphrase=""):
-    self.name = name
-    self.catchphrase = catchphrase
+  id = Column(Integer, primary_key = True)
+  title = Column(String, nullable = False)
+  release_date = Column(db.DateTime, nullable = False)
+  distribution = db.relationship('Actor', secondary=distribution, backref=db.backref('movie', lazy = True))
 
-  def format(self):
+  def __init__(self, title, release_date):
+    self.title = title
+    self.release_date = release_date
+  
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def update(self):
+    db.session.commit()
+
+  def list_movie(self):
     return {
-      'id': self.id,
-      'name': self.name,
-      'catchphrase': self.catchphrase}
+      "id": self.id,
+      "title" : self.title,
+      "release_date" : self.release_date
+    }
+
+  def list_movie_with_actors(self):
+    return {
+    "id" : self.id,
+    "title" : self.title,
+    "distribution" : [actor.name for actor in self.distribution]
+    }
+
+  def __repr__(self):
+    return "<Movie {} {} />".format(self.title, self.release_date)
+
+
+'''
+Actor 
+Have name, age, gender and distribution foreign key
+'''
+
+class Actor(db.Model):  
+  __tablename__ = 'actors'
+
+  id = Column(Integer, primary_key = True)
+  name = Column(String(100), nullable = False)
+  age = Column(Integer(), nullable = False)
+  gender = Column(String(), nullable = False)
+
+  def __init__(self, name, age, gender):
+    self.name = name
+    self.age = age
+    self.gender = gender
+
+  def insert(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def update(self):
+    db.session.commit()
+
+  def actors(self):
+    return {
+      "id": self.id,
+      "name" : self.name,
+      "age" : self.age,
+      "gender" : self.gender
+    }
+
+  def movies_per_actor(self):
+    return {
+      "name" : self.name,
+      "movies" : [movie.title for movie in self.movies ]
+    }
+
+  def __repr__(self):
+    return "<Actor {} {} {} />".format(self.name, self.age, self.gender)
