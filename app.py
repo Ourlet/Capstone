@@ -170,7 +170,7 @@ def create_app(test_config=None):
                 actor.age = body['age']
             
             actor.update()
-        
+       
         except:
             abort(422)
 

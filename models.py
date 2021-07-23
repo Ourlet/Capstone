@@ -11,7 +11,7 @@ setup_db(app):
 '''
 def setup_db(app):
     database_name ='local_capstone'
-    default_database_path= "postgres://{}:{}@{}/{}".format('postgres', 'Salope59', 'localhost:5432', database_name)
+    default_database_path= "postgresql+psycopg2://{}:{}@{}/{}".format('postgres', 'Salope59', 'localhost:5432', database_name)
     database_path = os.getenv('DATABASE_URL', default_database_path)
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
