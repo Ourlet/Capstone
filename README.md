@@ -55,7 +55,8 @@ Errors are returned as JSON objects in the following format:
     "success": False, 
     "error": 400,
     "message": "bad request"
-}```
+}
+```
 
 The API will return four error types when requests fail:
 * 400: Bad Request
@@ -66,7 +67,7 @@ The API will return four error types when requests fail:
 * 500: Internal Server Error
 
 ### Endpoints
-###GET /movies
+### GET /movies
 * Return the list of all movies
 * Requires get:movies permission
 * Sample request : https://capstone-ourlet.herokuapp.com/movies
@@ -91,9 +92,10 @@ The API will return four error types when requests fail:
     }
   ], 
   "success": true
-}```
+}
+```
 
-###GET /actors
+### GET /actors
 * Return the list of all actors
 * Requires get:actors permission
 * Sample request : https://capstone-ourlet.herokuapp.com/actors
@@ -119,9 +121,10 @@ The API will return four error types when requests fail:
       "id": 6, 
       "name": "Gerard Depardieu"
     }, 
-}```
+}
+```
 
-###POST /movies
+### POST /movies
 * Create a new movie
 * Requires post:movie
 * Request Body:
@@ -136,7 +139,7 @@ The API will return four error types when requests fail:
 }
 ```
 
-###POST /actors
+### POST /actors
 * Create a new actor
 * Requires post:actor
 * Request Body:
@@ -152,7 +155,7 @@ The API will return four error types when requests fail:
     "age": 78
 }
 ```
-###PATCH /movies/id
+### PATCH /movies/id
 * Update data of a movie
 * Requires patch:movie permission
 * Request body (at least one of the following);
@@ -164,8 +167,8 @@ The API will return four error types when requests fail:
 {
     "title": "Le grand Bleu"
 }
-
-###PATCH /actors/id
+```
+### PATCH /actors/id
 * Update data of an actor
 * Requires patch:actor permission
 * Request body (at least one of the following);
@@ -178,13 +181,13 @@ The API will return four error types when requests fail:
 {
     "name": "Jean Reno"
 }
-
-###DELETE /movies/id
+```
+### DELETE /movies/id
 * Delete a movie
 * Requires delete:movie permission
 * Sample request - https://capstone-ourlet.herokuapp.com/movies/1
 
-###DELETE /actors/id
+### DELETE /actors/id
 * Delete an actor
 * Requires delete:actor permission
 * Sample request - https://capstone-ourlet.herokuapp.com/actors/1
