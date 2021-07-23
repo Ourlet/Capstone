@@ -30,22 +30,22 @@ export FLASK_ENV=development
 flask run
 ```
 
-Setting the FLASK_ENV variable to development will detect file changes and restart the server automatically.
+Setting the `FLASK_ENV` variable to development will detect file changes and restart the server automatically.
 
 ## API Reference
 ### Roles
 The application has three type of roles:
 - Casting Assistant
     - Can view actors and movies
-    - has get:actors, get:movies permissions
+    - has `get:actors`, `get:movies` permissions
 
 - Casting Director
     - All permissions a Casting Assistant has and Add or delete an actor from the database and Modify actors or movies
-    - has get:actors, get:movies, delete:actor,patch:actor, patch:movie, post:actor	permissions
+    - has `get:actors`, `get:movies`, `delete:actor`, `patch:actor`, `patch:movie`, `post:actor` permissions
 
 - Executive Producer
     - All permissions a Casting Assistant has and Add or delete a movie from the database
-    - has delete:movie, get:actors, get:movies, post:movie permissions
+    - has `delete:movie`, `get:actors`, `get:movies`, `post:movie` permissions
 
 ### Error Handling
 Errors are returned as JSON objects in the following format:
@@ -69,7 +69,7 @@ The API will return four error types when requests fail:
 ### Endpoints
 ### GET /movies
 * Return the list of all movies
-* Requires get:movies permission
+* Requires `get:movies` permission
 * Sample request : https://capstone-ourlet.herokuapp.com/movies
 
 ```
@@ -97,7 +97,7 @@ The API will return four error types when requests fail:
 
 ### GET /actors
 * Return the list of all actors
-* Requires get:actors permission
+* Requires `get:actors` permission
 * Sample request : https://capstone-ourlet.herokuapp.com/actors
 
 ```
@@ -126,7 +126,7 @@ The API will return four error types when requests fail:
 
 ### POST /movies
 * Create a new movie
-* Requires post:movie
+* Requires `post:movie`
 * Request Body:
     - title: String, required
     - release_date: datetype, required
@@ -141,7 +141,7 @@ The API will return four error types when requests fail:
 
 ### POST /actors
 * Create a new actor
-* Requires post:actor
+* Requires `post:actor`
 * Request Body:
     - name: String, required
     - gender: String, required
@@ -157,7 +157,7 @@ The API will return four error types when requests fail:
 ```
 ### PATCH /movies/id
 * Update data of a movie
-* Requires patch:movie permission
+* Requires `patch:movie` permission
 * Request body (at least one of the following);
     - title: String, required
     - release_date: datetype, required
@@ -170,7 +170,7 @@ The API will return four error types when requests fail:
 ```
 ### PATCH /actors/id
 * Update data of an actor
-* Requires patch:actor permission
+* Requires `patch:actor` permission
 * Request body (at least one of the following);
     - name: String, required
     - gender: String, required
@@ -184,11 +184,11 @@ The API will return four error types when requests fail:
 ```
 ### DELETE /movies/id
 * Delete a movie
-* Requires delete:movie permission
+* Requires `delete:movie` permission
 * Sample request - https://capstone-ourlet.herokuapp.com/movies/1
 
 ### DELETE /actors/id
 * Delete an actor
-* Requires delete:actor permission
+* Requires `delete:actor` permission
 * Sample request - https://capstone-ourlet.herokuapp.com/actors/1
 
