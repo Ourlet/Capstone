@@ -67,3 +67,125 @@ The API will return four error types when requests fail:
 
 ### Endpoints
 ###GET /movies
+* Return the list of all movies
+* Requires get:movies permission
+* Sample request : https://capstone-ourlet.herokuapp.com/movies
+
+```
+{
+  "movies": [
+    {
+      "distribution": [], 
+      "id": 1, 
+      "title": "Terminator"
+    }, 
+    {
+      "distribution": [], 
+      "id": 2, 
+      "title": "The expendables 2"
+    }, 
+    {
+      "distribution": [], 
+      "id": 3, 
+      "title": "Predator"
+    }
+  ], 
+  "success": true
+}```
+
+###GET /actors
+* Return the list of all actors
+* Requires get:actors permission
+* Sample request : https://capstone-ourlet.herokuapp.com/actors
+
+```
+{
+  "actors": [
+    {
+      "age": 75, 
+      "gender": "M", 
+      "id": 3, 
+      "name": "Sylverster Stalone"
+    }, 
+    {
+      "age": 38, 
+      "gender": "F", 
+      "id": 4, 
+      "name": "Giselle Itie"
+    }, 
+    {
+      "age": 88, 
+      "gender": "M", 
+      "id": 6, 
+      "name": "Gerard Depardieu"
+    }, 
+}```
+
+###POST /movies
+* Create a new movie
+* Requires post:movie
+* Request Body:
+    - title: String, required
+    - release_date: datetype, required
+* Sample Request - https://capstone-ourlet.herokuapp.com/movies
+* Sample Body
+```
+{
+    "title": "Jurassic Park", 
+    "release_date": "2018-01-11"
+}
+```
+
+###POST /actors
+* Create a new actor
+* Requires post:actor
+* Request Body:
+    - name: String, required
+    - gender: String, required
+    - age: Integer, required
+* Sample Request - https://capstone-ourlet.herokuapp.com/actors
+* Sample Body
+```
+{
+    "name": "Gerard Depardieu", 
+    "gender": "M", 
+    "age": 78
+}
+```
+###PATCH /movies/id
+* Update data of a movie
+* Requires patch:movie permission
+* Request body (at least one of the following);
+    - title: String, required
+    - release_date: datetype, required
+* Sample Request - https://capstone-ourlet.herokuapp.com/movies/1
+* Sample Body 
+```
+{
+    "title": "Le grand Bleu"
+}
+
+###PATCH /actors/id
+* Update data of an actor
+* Requires patch:actor permission
+* Request body (at least one of the following);
+    - name: String, required
+    - gender: String, required
+    - age: Integer, required
+* Sample Request - https://capstone-ourlet.herokuapp.com/actors/3
+* Sample Body 
+```
+{
+    "name": "Jean Reno"
+}
+
+###DELETE /movies/id
+* Delete a movie
+* Requires delete:movie permission
+* Sample request - https://capstone-ourlet.herokuapp.com/movies/1
+
+###DELETE /actors/id
+* Delete an actor
+* Requires delete:actor permission
+* Sample request - https://capstone-ourlet.herokuapp.com/actors/1
+
